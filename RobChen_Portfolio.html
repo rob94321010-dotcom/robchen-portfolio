@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rob Chen 陳正立 — Portfolio</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --accent: #2C6E6A; --accent-light: #E6F4F3;
+  --dark: #1a1a1a; --mid: #444; --soft: #777;
+  --rule: #e0e0e0; --bg: #fafafa; --white: #ffffff;
+  --gold: #B8860B; --gold-light: #FFF8E7;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; }
+
+/* LANG */
+.lang-toggle { display: flex; border: 1.5px solid var(--accent); border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { padding: 5px 12px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; background: transparent; color: var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; }
+.lang-btn.active { background: var(--accent); color: white; }
+body.lang-en [data-zh] { display: none !important; }
+body.lang-zh [data-en] { display: none !important; }
+
+/* NAV */
+nav { background: var(--white); border-bottom: 1px solid var(--rule); padding: 0 1.2rem; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 0.8rem; flex-wrap: nowrap; }
+.nav-name { font-size: 15px; font-weight: 600; color: var(--dark); font-family: Georgia, serif; white-space: nowrap; }
+.nav-name span { color: var(--accent); }
+.nav-links { display: flex; gap: 1rem; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--soft); text-decoration: none; }
+.nav-links a:hover { color: var(--accent); }
+@media (max-width: 600px) { .nav-links { display: none; } .nav-name { font-size: 14px; } }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, #1B4A47 0%, #2C6E6A 60%, #3D8C87 100%); color: white; padding: 4rem 2rem 3.5rem; text-align: center; }
+.hero-name { font-size: 40px; font-weight: 300; font-family: Georgia, serif; margin-bottom: 6px; }
+.hero-name strong { font-weight: 700; }
+.hero-name .sub { opacity: 0.75; font-size: 30px; margin-left: 10px; }
+.hero-role { font-size: 13px; opacity: 0.85; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.hero-desc { font-size: 15px; opacity: 0.9; max-width: 580px; margin: 0 auto 1.6rem; line-height: 1.75; }
+.hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+
+/* LAYOUT */
+.container { max-width: 880px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 2.8rem 0 2rem; border-bottom: 1px solid var(--rule); }
+.section:last-child { border-bottom: none; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.6rem; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); white-space: nowrap; }
+.section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+.card { background: var(--white); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+.card:hover { box-shadow: 0 4px 20px rgba(44,110,106,0.12); transform: translateY(-2px); }
+.card-band { height: 5px; }
+.band-teal { background: linear-gradient(90deg, #2C6E6A, #3D8C87); }
+.band-gold { background: linear-gradient(90deg, #B8860B, #D4A017); }
+.band-slate { background: linear-gradient(90deg, #4A5568, #718096); }
+.band-rose { background: linear-gradient(90deg, #9B4D63, #C4738A); }
+.card-body { padding: 1.2rem; }
+.card-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+.card-title { font-size: 15px; font-weight: 600; color: var(--dark); font-family: Georgia, serif; margin-bottom: 4px; line-height: 1.3; }
+.card-sub { font-size: 12px; color: var(--soft); margin-bottom: 10px; font-style: italic; }
+.card-desc { font-size: 13px; color: var(--mid); line-height: 1.6; margin-bottom: 12px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.tag { font-size: 10.5px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
+.tag-teal { background: var(--accent-light); color: var(--accent); }
+.tag-gold { background: var(--gold-light); color: var(--gold); }
+.tag-grey { background: #f0f0f0; color: #555; }
+.card-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1.5px solid var(--accent); border-radius: 6px; transition: background 0.2s, color 0.2s; }
+.card-link:hover { background: var(--accent); color: white; }
+.card-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* AWARDS */
+.award-list { display: flex; flex-direction: column; gap: 10px; }
+.award-item { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; }
+.award-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.award-body { flex: 1; }
+.award-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+.award-meta { font-size: 12px; color: var(--soft); }
+.award-year { font-size: 11px; font-weight: 700; background: var(--gold-light); color: var(--gold); padding: 2px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+
+/* CONTACT */
+.contact-bar { background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 1.6rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; }
+.contact-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid); text-decoration: none; }
+.contact-item svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.contact-item:hover { color: var(--accent); }
+
+footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft); border-top: 1px solid var(--rule); }
+</style>
+</head>
+<body class="lang-en">
+
+<nav>
+  <div class="nav-name">Rob Chen <span>陳正立</span></div>
+  <ul class="nav-links">
+    <li><a href="#translation" data-en>Translation</a><a href="#translation" data-zh>翻譯作品</a></li>
+    <li><a href="#publication" data-en>Publication</a><a href="#publication" data-zh>出版</a></li>
+    <li><a href="#awards" data-en>Awards</a><a href="#awards" data-zh>獲獎</a></li>
+    <li><a href="#contact" data-en>Contact</a><a href="#contact" data-zh>聯絡</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-name"><strong>Rob Chen</strong><span class="sub">陳正立</span></div>
+  <div class="hero-role" data-en>Bilingual Content Specialist · Literary Translator · Award-winning Author</div>
+  <div class="hero-role" data-zh>雙語內容專家 · 文學譯者 · 獲獎詩人</div>
+  <div class="hero-desc" data-en>M.A. in Comparative Literature · TOEIC 940 · PMP® Certified<br>Over a decade of professional bilingual writing across technical documentation, literary translation, and brand copy — in English and Traditional Chinese.</div>
+  <div class="hero-desc" data-zh>東吳大學英美文學研究所碩士 · 精通英語（TOEIC 940）· PMP®認證<br>二十年以上中英雙語專業寫作經驗，涵蓋技術文件、文學翻譯與品牌文案。</div>
+  <div class="hero-tags">
+    <span class="hero-tag" data-en>EN ⇄ ZH Translation</span><span class="hero-tag" data-zh>中英翻譯</span>
+    <span class="hero-tag" data-en>Technical Writing</span><span class="hero-tag" data-zh>技術文件</span>
+    <span class="hero-tag" data-en>Brand Copywriting</span><span class="hero-tag" data-zh>品牌文案</span>
+    <span class="hero-tag" data-en>Literary Translation</span><span class="hero-tag" data-zh>文學翻譯</span>
+    <span class="hero-tag" data-en>Indigenous Culture</span><span class="hero-tag" data-zh>原住民文化</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="section" id="translation">
+    <div class="section-header">
+      <span class="section-title" data-en>Translation &amp; Content Projects</span>
+      <span class="section-title" data-zh>翻譯與內容創作</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-band band-teal"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Lyrics Translation · Band Profile</div>
+          <div class="card-type" data-zh>歌詞翻譯 · 樂團文案</div>
+          <div class="card-title">有人在夜裡跳舞<br><em style="font-size:13px;font-weight:400">Someone is Dancing at Night</em></div>
+          <div class="card-sub">WUTU Band 烏兔樂團 · 2021–2022</div>
+          <div class="card-desc" data-en>Translated the Chinese lyrics of 「有人在夜裡跳舞」into English for this alternative rock band's official animated MV — credited as official translator in the YouTube production credits (<em>Translation | Rob Chen</em>). Also authored the English band biography and MV description, published on StreetVoice and TWMusicWriting.</div>
+          <div class="card-desc" data-zh>將烏兔樂團〈有人在夜裡跳舞〉中文歌詞英譯，由樂團主唱吟唱於官方動畫。另撰寫英文樂團介紹及MV說明文字，發布於 StreetVoice及TWMusicWriting。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>ZH → EN</span><span class="tag tag-teal" data-zh>中譯英</span>
+            <span class="tag tag-grey" data-en>Music</span><span class="tag tag-grey" data-zh>音樂</span>
+            <span class="tag tag-grey" data-en>Official Credit</span><span class="tag tag-grey" data-zh>官方署名</span>
+          </div>
+          <a class="card-link" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span data-en>Watch Official MV</span><span data-zh>觀看官方 MV</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-band band-rose"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Full Album Translation</div>
+          <div class="card-type" data-zh>整張專輯翻譯</div>
+          <div class="card-title">女人島<br><em style="font-size:13px;font-weight:400">Women's Island</em></div>
+          <div class="card-sub">阿洛·卡力亭·巴奇辣 Ado Kaliting Pacidal · 2021</div>
+          <div class="card-desc" data-en>Full ZH→EN translation for indigenous Taiwanese artist Ado Kaliting Pacidal's album <em>Women's Island</em>: 7 song lyrics, album concept essay, and 3 international Austronesian musician bios (Malaysia, New Zealand, Indonesia). Content spans Pangcah indigenous culture, Austronesian identity, cross-island feminism, and environmental advocacy.</div>
+          <div class="card-desc" data-zh>負責原住民音樂人阿洛·卡力亭·巴奇辣《女人島》中歌詞的中文英譯：包括7首歌詞、專輯概念文案，以及3位國際南島音樂人簡介（馬來西亞、紐西蘭、印尼）。內容涵蓋巴賽族原住民文化、南島語族認同、跨島嶼女性主義與生態議題。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>ZH → EN</span><span class="tag tag-teal" data-zh>中譯英</span>
+            <span class="tag tag-grey" data-en>Indigenous</span><span class="tag tag-grey" data-zh>原住民文化</span>
+            <span class="tag tag-grey" data-en>Full Album</span><span class="tag tag-grey" data-zh>整張專輯</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-band band-slate"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Bilingual Gift Copywriting</div>
+          <div class="card-type" data-zh>雙語禮品文案</div>
+          <div class="card-title" data-en>Sky Lantern Teacup &amp; Indigo Dyed Coaster</div>
+          <div class="card-title" data-zh>天燈杯 &amp; 藍染杯墊</div>
+          <div class="card-sub" data-en>National Academy for Educational Research (NAER) · Sep 2020</div>
+          <div class="card-sub" data-zh>國家教育研究院 · 2020年9月</div>
+          <div class="card-desc" data-en>Authored bilingual (EN/ZH) gift copy for two institutional gifts commissioned by NAER. Wove the cultural heritage of Pingxi sky lanterns and Sanxia indigo dyeing traditions into brand narratives aligned with NAER's educational philosophy.</div>
+          <div class="card-desc" data-zh>受國家教育研究院委託，撰寫天燈杯及藍染杯墊兩件禮品的中英雙語文案，將平溪天燈與三峽藍染的在地歷史工藝，融入國教院教育理念，俾使禮品兼具文化深度與品牌識別度。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>EN + ZH</span><span class="tag tag-teal" data-zh>中文＋英文</span>
+            <span class="tag tag-grey" data-en>Brand Copy</span><span class="tag tag-grey" data-zh>品牌文案</span>
+            <span class="tag tag-grey" data-en>Government</span><span class="tag tag-grey" data-zh>政府機關</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="card-link" href="NAER_SkyLanternTeacup.pdf" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-en>Sky Lantern Teacup</span><span data-zh>天燈杯文案</span>
+            </a>
+            <a class="card-link" href="NAER_IndigoDyedCoaster.pdf" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-en>Indigo Dyed Coaster</span><span data-zh>藍染杯墊文案</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="publication">
+    <div class="section-header">
+      <span class="section-title" data-en>Publication</span>
+      <span class="section-title" data-zh>出版</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-band band-gold"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Bilingual Poetry Collection</div>
+          <div class="card-type" data-zh>中英雙語詩集</div>
+          <div class="card-title">詩眠集<br><em style="font-size:13px;font-weight:400">In Some Nights, Poetry</em></div>
+          <div class="card-sub" data-en>Showwe Information 秀威資訊 · 2019</div>
+          <div class="card-sub" data-zh>秀威資訊 · 2019年4月</div>
+          <div class="card-desc" data-en>A bilingual poetry collection published by Showwe Information. Upon publication, the author was interviewed by <em>The Roundtable: A Journal of Poetry</em> (Hong Kong, vol.66) and invited to share work on Hansheng Radio's "Learning is Now" programme.</div>
+          <div class="card-desc" data-zh>中英雙語詩集，由秀威資訊出版。出版後，作者接受香港《圓桌詩刊》第六十六期專訪，並受邀於漢聲廣播電台「學習就是現在」節目分享創作。</div>
+          <div class="card-tags">
+            <span class="tag tag-gold" data-en>Published</span><span class="tag tag-gold" data-zh>已出版</span>
+            <span class="tag tag-grey" data-en>ZH + EN</span><span class="tag tag-grey" data-zh>中文＋英文</span>
+            <span class="tag tag-grey">2019</span>
+          </div>
+          <a class="card-link" href="https://www.books.com.tw/products/0010819596" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-en>View on Books.com.tw</span><span data-zh>博客來購買頁面</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="awards">
+    <div class="section-header">
+      <span class="section-title" data-en>Awards &amp; Recognition</span>
+      <span class="section-title" data-zh>獲獎紀錄</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="award-list">
+
+      <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Outstanding Young Poet Award (2023)</div>
+          <div class="award-title" data-zh>2023年優秀青年詩人獎</div>
+          <div class="award-meta" data-en>Poetry Society of the Republic of China (中華民國新詩學會) · Awarded 2024</div>
+          <div class="award-meta" data-zh>中華民國新詩學會 · 2024年頒發</div>
+        </div>
+        <div class="award-year">2024</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥇</div>
+        <div class="award-body">
+          <div class="award-title" data-en>1st Prize — "Poet Write for You" Bilingual Poetry Competition</div>
+          <div class="award-title" data-zh>「文青稅客，為你寫詩」雙語詩徵文活動首獎</div>
+          <div class="award-meta" data-en>Poem: 〈一位父親納稅者的獨白〉"The Monologue of a Taxpayer as a Father"</div>
+          <div class="award-meta" data-zh>作品：〈一位父親納稅者的獨白〉</div>
+        </div>
+        <div class="award-year">2022</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">📖</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Published — In Some Nights, Poetry (Insomnia Poetry 詩眠集)</div>
+          <div class="award-title" data-zh>出版《詩眠集》Insomnia Poetry; In Some Nights, Poetry</div>
+          <div class="award-meta" data-en>Showwe Information · Interviewed by The Roundtable: A Journal of Poetry (Hong Kong, vol.66)</div>
+          <div class="award-meta" data-zh>秀威資訊 · 接受香港《圓桌詩刊》第六十六期專訪</div>
+        </div>
+        <div class="award-year">2019</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🎬</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Selected Work — 〈雙子〉(Twins)</div>
+          <div class="award-title" data-zh>〈雙子〉獲「電影截句」優選詩作</div>
+          <div class="award-meta" data-en>電影截句 (Short Poems About Film) Competition</div>
+          <div class="award-meta" data-zh>電影截句詩選競賽 · 優選入選</div>
+        </div>
+        <div class="award-year">2018</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥇</div>
+        <div class="award-body">
+          <div class="award-title" data-en>1st Prize — 2nd Swordsoul Literary Competition (第二屆舞劍壇文學獎)</div>
+          <div class="award-title" data-zh>第二屆舞劍壇文學獎新詩組首獎</div>
+          <div class="award-meta" data-en>New Poetry Category · Poem: 〈麗姐〉(Leda)</div>
+          <div class="award-meta" data-zh>新詩組 · 作品：〈麗姐〉</div>
+        </div>
+        <div class="award-year">2009</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-body">
+          <div class="award-title" data-en>3rd Place — Happy Poetry Nanometer Prose Poetry Competition</div>
+          <div class="award-title" data-zh>幸福詩歌奈米散文詩徵文第三名</div>
+          <div class="award-meta" data-en>Poem: 〈雙人舞〉(Dance for Two)</div>
+          <div class="award-meta" data-zh>作品：〈雙人舞〉</div>
+        </div>
+        <div class="award-year">2006</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-body">
+          <div class="award-title" data-en>3rd Place — 26th Shuanghsi Literary Competition (第二十六屆雙溪文學獎)</div>
+          <div class="award-title" data-zh>第二十六屆雙溪文學獎新詩組第三名</div>
+          <div class="award-meta" data-en>New Poetry Category · Poem: 〈妳把白天晝成了海洋〉(You Painted the Day as the Sea)</div>
+          <div class="award-meta" data-zh>新詩組 · 作品：〈妳把白天晝成了海洋〉</div>
+        </div>
+        <div class="award-year">2003</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="contact">
+    <div class="section-header">
+      <span class="section-title" data-en>Contact</span>
+      <span class="section-title" data-zh>聯絡方式</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-bar">
+      <a class="contact-item" href="mailto:rob94321010@gmail.com">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        rob94321010@gmail.com
+      </a>
+      <a class="contact-item" href="https://linkedin.com/in/chengli-chen" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-item" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span data-en>WUTU MV (Translation Credit)</span><span data-zh>WUTU MV（翻譯署名）</span>
+      </a>
+      <a class="contact-item" href="https://www.books.com.tw/products/0010819596" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span data-en>Poetry Collection</span><span data-zh>詩集購買頁面</span>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span data-en>Rob Chen 陳正立 · Bilingual Content Specialist · rob94321010@gmail.com</span>
+  <span data-zh>陳正立 Rob Chen · 雙語內容專家 · rob94321010@gmail.com</span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent === (lang === 'zh' ? '中文' : 'EN'));
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+}
+</script>
+</body>
+</html>
