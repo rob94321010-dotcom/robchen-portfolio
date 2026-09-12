@@ -14,69 +14,21 @@
 }
 body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; }
 
-/* LANG — Safari-safe */
-.lang-toggle {
-  display: inline-flex;
-  flex: 0 0 auto;
-  border: 1.5px solid var(--accent);
-  border-radius: 6px;
-  overflow: hidden;
-  background: var(--white);
-  white-space: nowrap;
-}
-.lang-btn {
-  appearance: none;
-  -webkit-appearance: none;
-  display: inline-block;
-  min-width: 48px;
-  padding: 5px 12px;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
-  border: 0;
-  border-radius: 0;
-  cursor: pointer;
-  background: transparent;
-  color: var(--accent);
-  transition: background 0.2s, color 0.2s;
-}
-.lang-btn.active { background: var(--accent); color: #fff; }
+/* LANG */
+.lang-toggle { display: flex; border: 1.5px solid var(--accent); border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { padding: 5px 12px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; background: transparent; color: var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; }
+.lang-btn.active { background: var(--accent); color: white; }
 body.lang-en [data-zh] { display: none !important; }
 body.lang-zh [data-en] { display: none !important; }
 
-/* NAV — keep language switch visible */
-nav {
-  background: var(--white);
-  border-bottom: 1px solid var(--rule);
-  padding: 0 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  height: 56px;
-}
-.nav-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--dark);
-  font-family: Georgia, serif;
-  white-space: nowrap;
-  flex: 0 0 auto;
-}
+/* NAV */
+nav { background: var(--white); border-bottom: 1px solid var(--rule); padding: 0 1.2rem; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 0.8rem; flex-wrap: nowrap; }
+.nav-name { font-size: 15px; font-weight: 600; color: var(--dark); font-family: Georgia, serif; white-space: nowrap; }
 .nav-name span { color: var(--accent); }
-.nav-links {
-  display: flex;
-  gap: 1.2rem;
-  list-style: none;
-  margin-left: auto;
-  margin-right: 1rem;
-  flex: 0 1 auto;
-}
-.nav-links li { white-space: nowrap; }
+.nav-links { display: flex; gap: 1rem; list-style: none; }
 .nav-links a { font-size: 13px; color: var(--soft); text-decoration: none; }
 .nav-links a:hover { color: var(--accent); }
+@media (max-width: 600px) { .nav-links { display: none; } .nav-name { font-size: 14px; } }
 
 /* HERO */
 .hero { background: linear-gradient(135deg, #1B4A47 0%, #2C6E6A 60%, #3D8C87 100%); color: white; padding: 4rem 2rem 3.5rem; text-align: center; }
@@ -133,40 +85,12 @@ nav {
 .contact-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid); text-decoration: none; }
 .contact-item svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 .contact-item:hover { color: var(--accent); }
+
 footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft); border-top: 1px solid var(--rule); }
-
-/* MOBILE / SAFARI */
-@media (max-width: 760px) {
-  nav {
-    height: auto;
-    min-height: 56px;
-    padding: 10px 1rem;
-    flex-wrap: wrap;
-    row-gap: 8px;
-  }
-  .nav-name { margin-right: auto; }
-  .nav-links {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-    gap: 1rem;
-  }
-  .lang-toggle { margin-left: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-  .hero { padding: 3rem 1.2rem 2.8rem; }
-  .hero-name { font-size: 32px; }
-  .hero-name .sub { font-size: 24px; }
-  .container { padding: 0 1rem; }
-  .nav-links { gap: 0.7rem; }
-  .nav-links a { font-size: 12px; }
-}
 </style>
 </head>
-
 <body class="lang-en">
+
 <nav>
   <div class="nav-name">Rob Chen <span>陳正立</span></div>
   <ul class="nav-links">
@@ -175,16 +99,20 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
     <li><a href="#awards" data-en>Awards</a><a href="#awards" data-zh>獲獎</a></li>
     <li><a href="#contact" data-en>Contact</a><a href="#contact" data-zh>聯絡</a></li>
   </ul>
-  <div class="lang-toggle" role="group" aria-label="Language">
-    <button class="lang-btn active" data-lang="en" aria-pressed="true" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" data-lang="zh" aria-pressed="false" onclick="setLang('zh')">中文</button>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
   </div>
+  <a href="https://rob94321010-dotcom.github.io/robchen_portfolio_PMP/" target="_blank"
+     style="font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;background:#1d4ed8;color:white;text-decoration:none;white-space:nowrap;flex-shrink:0;">
+    📋 PM Portfolio
+  </a>
 </nav>
 
 <div class="hero">
   <div class="hero-name"><strong>Rob Chen</strong><span class="sub">陳正立</span></div>
-  <div class="hero-role" data-en>Bilingual Content Specialist · Literary Translator · Award-winning Author</div>
-  <div class="hero-role" data-zh>雙語內容專家 · 文學譯者 · 獲獎詩人</div>
+  <div class="hero-role" data-en>Bilingual Writer &amp; Content Creator · Literary Translator · Award-winning Author</div>
+  <div class="hero-role" data-zh>雙語作家與內容創作者 · 文學譯者 · 獲獎詩人</div>
   <div class="hero-desc" data-en>M.A. in Comparative Literature · TOEIC 940 · PMP® Certified<br>Over a decade of professional bilingual writing across technical documentation, literary translation, and brand copy — in English and Traditional Chinese.</div>
   <div class="hero-desc" data-zh>東吳大學英美文學研究所碩士 · 精通英語（TOEIC 940）· PMP®認證<br>二十年以上中英雙語專業寫作經驗，涵蓋技術文件、文學翻譯與品牌文案。</div>
   <div class="hero-tags">
@@ -197,6 +125,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
 </div>
 
 <div class="container">
+
   <div class="section" id="translation">
     <div class="section-header">
       <span class="section-title" data-en>Translation &amp; Content Projects</span>
@@ -204,6 +133,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
       <div class="section-rule"></div>
     </div>
     <div class="card-grid">
+
       <div class="card">
         <div class="card-band band-teal"></div>
         <div class="card-body">
@@ -212,13 +142,13 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
           <div class="card-title">有人在夜裡跳舞<br><em style="font-size:13px;font-weight:400">Someone is Dancing at Night</em></div>
           <div class="card-sub">WUTU Band 烏兔樂團 · 2021–2022</div>
           <div class="card-desc" data-en>Translated the Chinese lyrics of 「有人在夜裡跳舞」into English for this alternative rock band's official animated MV — credited as official translator in the YouTube production credits (<em>Translation | Rob Chen</em>). Also authored the English band biography and MV description, published on StreetVoice and TWMusicWriting.</div>
-          <div class="card-desc" data-zh>將烏兔樂團〈有人在夜裡跳舞〉中文歌詞英譯，由樂團主唱吟唱於官方動畫。另撰寫英文樂團介紹及MV說明文字，發布於 StreetVoice及TWMusicWriting。</div>
+          <div class="card-desc" data-zh>將烏兔樂團〈有人在夜裡跳舞〉中文歌詞英譯，由樂團主唱譜曲吟唱。另撰寫英文樂團介紹及MV說明文字，發布於 StreetVoice及TWMusicWriting。</div>
           <div class="card-tags">
             <span class="tag tag-teal" data-en>ZH → EN</span><span class="tag tag-teal" data-zh>中譯英</span>
             <span class="tag tag-grey" data-en>Music</span><span class="tag tag-grey" data-zh>音樂</span>
             <span class="tag tag-grey" data-en>Official Credit</span><span class="tag tag-grey" data-zh>官方署名</span>
           </div>
-          <a class="card-link" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank" rel="noopener">
+          <a class="card-link" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
             <span data-en>Watch Official MV</span><span data-zh>觀看官方 MV</span>
           </a>
@@ -270,6 +200,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
           </div>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -280,6 +211,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
       <div class="section-rule"></div>
     </div>
     <div class="card-grid">
+
       <div class="card">
         <div class="card-band band-gold"></div>
         <div class="card-body">
@@ -295,12 +227,13 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
             <span class="tag tag-grey" data-en>ZH + EN</span><span class="tag tag-grey" data-zh>中文＋英文</span>
             <span class="tag tag-grey">2019</span>
           </div>
-          <a class="card-link" href="https://www.books.com.tw/products/0010819596" target="_blank" rel="noopener">
+          <a class="card-link" href="https://www.books.com.tw/products/0010819596" target="_blank">
             <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             <span data-en>View on Books.com.tw</span><span data-zh>博客來購買頁面</span>
           </a>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -311,6 +244,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
       <div class="section-rule"></div>
     </div>
     <div class="award-list">
+
       <div class="award-item">
         <div class="award-icon">🏆</div>
         <div class="award-body">
@@ -387,6 +321,7 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
         </div>
         <div class="award-year">2003</div>
       </div>
+
     </div>
   </div>
 
@@ -401,20 +336,21 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
         <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
         rob94321010@gmail.com
       </a>
-      <a class="contact-item" href="https://www.linkedin.com/in/chengli-chen-177312a1" target="_blank" rel="noopener">
+      <a class="contact-item" href="https://linkedin.com/in/chengli-chen" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
         LinkedIn
       </a>
-      <a class="contact-item" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank" rel="noopener">
+      <a class="contact-item" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
         <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         <span data-en>WUTU MV (Translation Credit)</span><span data-zh>WUTU MV（翻譯署名）</span>
       </a>
-      <a class="contact-item" href="https://www.books.com.tw/products/0010819596" target="_blank" rel="noopener">
+      <a class="contact-item" href="https://www.books.com.tw/products/0010819596" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         <span data-en>Poetry Collection</span><span data-zh>詩集購買頁面</span>
       </a>
     </div>
   </div>
+
 </div>
 
 <footer>
@@ -424,24 +360,12 @@ footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft);
 
 <script>
 function setLang(lang) {
-  var isZh = lang === 'zh';
-
-  document.body.classList.remove('lang-en', 'lang-zh');
-  document.body.classList.add(isZh ? 'lang-zh' : 'lang-en');
-
-  var buttons = document.querySelectorAll('.lang-btn');
-  buttons.forEach(function(btn) {
-    var active = btn.getAttribute('data-lang') === lang;
-    btn.classList.toggle('active', active);
-    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent === (lang === 'zh' ? '中文' : 'EN'));
   });
-
-  document.documentElement.setAttribute('lang', isZh ? 'zh-TW' : 'en');
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-  setLang('en');
-});
 </script>
 </body>
 </html>
