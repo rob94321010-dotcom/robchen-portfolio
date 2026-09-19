@@ -4,729 +4,487 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rob Chen 陳正立 — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --accent: #2C6E6A; --accent-light: #E6F4F3;
+  --dark: #1a1a1a; --mid: #444; --soft: #777;
+  --rule: #e0e0e0; --bg: #fafafa; --white: #ffffff;
+  --gold: #B8860B; --gold-light: #FFF8E7;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; }
 
-  :root {
-    --navy: #0D1B2A;
-    --blue: #1B6CA8;
-    --gold: #E8A838;
-    --cream: #F7F4EF;
-    --white: #FFFFFF;
-    --text: #1A1A2E;
-    --muted: #6B7280;
-    --border: #E5E7EB;
-  }
+/* LANG */
+.lang-toggle { display: flex; border: 1.5px solid var(--accent); border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+.lang-btn { padding: 5px 12px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; background: transparent; color: var(--accent); transition: background 0.2s, color 0.2s; white-space: nowrap; }
+.lang-btn.active { background: var(--accent); color: white; }
+body.lang-en [data-zh] { display: none !important; }
+body.lang-zh [data-en] { display: none !important; }
 
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav { background: var(--white); border-bottom: 1px solid var(--rule); padding: 0 1.2rem; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; height: 52px; gap: 0.8rem; flex-wrap: nowrap; }
+.nav-name { font-size: 15px; font-weight: 600; color: var(--dark); font-family: Georgia, serif; white-space: nowrap; }
+.nav-name span { color: var(--accent); }
+.nav-links { display: flex; gap: 1rem; list-style: none; }
+.nav-links a { font-size: 13px; color: var(--soft); text-decoration: none; }
+.nav-links a:hover { color: var(--accent); }
+@media (max-width: 600px) { .nav-links { display: none; } .nav-name { font-size: 14px; } }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--white);
-    color: var(--text);
-    font-size: 16px;
-    line-height: 1.6;
-  }
+/* HERO */
+.hero { background: linear-gradient(135deg, #1B4A47 0%, #2C6E6A 60%, #3D8C87 100%); color: white; padding: 4rem 2rem 3.5rem; text-align: center; }
+.hero-name { font-size: 40px; font-weight: 300; font-family: Georgia, serif; margin-bottom: 6px; }
+.hero-name strong { font-weight: 700; }
+.hero-name .sub { opacity: 0.75; font-size: 30px; margin-left: 10px; }
+.hero-role { font-size: 13px; opacity: 0.85; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.hero-desc { font-size: 15px; opacity: 0.9; max-width: 580px; margin: 0 auto 1.6rem; line-height: 1.75; }
+.hero-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 4px 12px; border-radius: 20px; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(13,27,42,0.96);
-    backdrop-filter: blur(8px);
-    padding: 0 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    height: 60px;
-  }
-  .nav-name { color: var(--white); font-weight: 600; font-size: 1rem; letter-spacing: 0.02em; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    color: rgba(255,255,255,0.7); text-decoration: none;
-    font-size: 0.875rem; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a.pm { color: #7EB8E8; }
-  .nav-links a.creative { color: #F5C842; }
+/* LAYOUT */
+.container { max-width: 880px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 2.8rem 0 2rem; border-bottom: 1px solid var(--rule); }
+.section:last-child { border-bottom: none; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.6rem; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); white-space: nowrap; }
+.section-rule { flex: 1; height: 1px; background: var(--rule); }
 
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    background: var(--navy);
-    display: flex; align-items: center;
-    padding: 80px 2rem 4rem;
-  }
-  .hero-inner {
-    max-width: 900px; margin: 0 auto; width: 100%;
-  }
-  .hero-label {
-    display: inline-block;
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.12em;
-    color: var(--gold); text-transform: uppercase;
-    margin-bottom: 1.5rem;
-  }
-  .hero h1 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(2.8rem, 7vw, 5rem);
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 0.5rem;
-  }
-  .hero h1 span { font-weight: 600; }
-  .hero-zh {
-    font-family: 'Lora', serif;
-    font-size: 1.5rem;
-    color: rgba(255,255,255,0.45);
-    margin-bottom: 2rem;
-  }
-  .hero-divider {
-    width: 48px; height: 2px;
-    background: linear-gradient(90deg, var(--blue), var(--gold));
-    margin-bottom: 2rem;
-  }
-  .hero-desc {
-    font-family: 'Lora', serif;
-    font-size: 1.125rem; line-height: 1.75;
-    color: rgba(255,255,255,0.7);
-    max-width: 600px;
-    margin-bottom: 2.5rem;
-  }
-  .hero-stats {
-    display: flex; flex-wrap: wrap; gap: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-  .hero-stat { }
-  .hero-stat-num {
-    font-size: 2rem; font-weight: 600;
-    color: var(--white); line-height: 1;
-  }
-  .hero-stat-num.blue { color: #7EB8E8; }
-  .hero-stat-num.gold { color: var(--gold); }
-  .hero-stat-label {
-    font-size: 0.8rem; color: rgba(255,255,255,0.45);
-    margin-top: 0.25rem;
-  }
-  .hero-badges {
-    display: flex; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .badge {
-    padding: 0.35rem 0.85rem;
-    border-radius: 2px;
-    font-size: 0.78rem; font-weight: 500;
-    border: 1px solid;
-  }
-  .badge-blue { border-color: #1B6CA8; color: #7EB8E8; background: rgba(27,108,168,0.1); }
-  .badge-gold { border-color: #E8A838; color: #F5C842; background: rgba(232,168,56,0.1); }
-  .badge-neutral { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); background: transparent; }
+/* CARDS */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+.card { background: var(--white); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+.card:hover { box-shadow: 0 4px 20px rgba(44,110,106,0.12); transform: translateY(-2px); }
+.card-band { height: 5px; }
+.band-teal { background: linear-gradient(90deg, #2C6E6A, #3D8C87); }
+.band-gold { background: linear-gradient(90deg, #B8860B, #D4A017); }
+.band-slate { background: linear-gradient(90deg, #4A5568, #718096); }
+.band-rose { background: linear-gradient(90deg, #9B4D63, #C4738A); }
+.card-body { padding: 1.2rem; }
+.card-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+.card-title { font-size: 15px; font-weight: 600; color: var(--dark); font-family: Georgia, serif; margin-bottom: 4px; line-height: 1.3; }
+.card-sub { font-size: 12px; color: var(--soft); margin-bottom: 10px; font-style: italic; }
+.card-desc { font-size: 13px; color: var(--mid); line-height: 1.6; margin-bottom: 12px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.tag { font-size: 10.5px; padding: 2px 8px; border-radius: 12px; font-weight: 500; }
+.tag-teal { background: var(--accent-light); color: var(--accent); }
+.tag-gold { background: var(--gold-light); color: var(--gold); }
+.tag-grey { background: #f0f0f0; color: #555; }
+.card-link { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; padding: 5px 12px; border: 1.5px solid var(--accent); border-radius: 6px; transition: background 0.2s, color 0.2s; }
+.card-link:hover { background: var(--accent); color: white; }
+.card-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-  /* SECTION BASE */
-  .section { padding: 5rem 2rem; }
-  .section-inner { max-width: 900px; margin: 0 auto; }
-  .section-label {
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
-    text-transform: uppercase; margin-bottom: 0.75rem;
-  }
-  .section-label.blue { color: var(--blue); }
-  .section-label.gold { color: #B8821A; }
-  .section h2 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: clamp(1.6rem, 3.5vw, 2.25rem);
-    font-weight: 600; line-height: 1.2;
-    margin-bottom: 3rem;
-  }
+/* AWARDS */
+.award-list { display: flex; flex-direction: column; gap: 10px; }
+.award-item { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: 14px 16px; }
+.award-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.award-body { flex: 1; }
+.award-title { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+.award-meta { font-size: 12px; color: var(--soft); }
+.award-year { font-size: 11px; font-weight: 700; background: var(--gold-light); color: var(--gold); padding: 2px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
 
-  /* DIVIDER */
-  .section-divider {
-    height: 1px; background: var(--border);
-    max-width: 900px; margin: 0 auto;
-  }
-  .section-alt { background: var(--cream); }
+/* CONTACT */
+.contact-bar { background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 1.6rem; display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: center; }
+.contact-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--mid); text-decoration: none; }
+.contact-item svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+.contact-item:hover { color: var(--accent); }
 
-  /* PM PROJECTS TABLE */
-  .proj-table {
-    width: 100%; border-collapse: collapse;
-    margin-bottom: 1.5rem;
-  }
-  .proj-table th {
-    text-align: left; padding: 0.6rem 1rem;
-    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--muted);
-    border-bottom: 2px solid var(--blue);
-  }
-  .proj-table td {
-    padding: 0.85rem 1rem;
-    font-size: 0.9rem; vertical-align: top;
-    border-bottom: 1px solid var(--border);
-  }
-  .proj-table tr:hover td { background: rgba(27,108,168,0.04); }
-  .proj-table td:first-child { font-weight: 600; color: var(--text); }
-  .proj-table .result { color: var(--blue); font-size: 0.85rem; }
-  .proj-table .mono {
-    font-size: 0.78rem; color: var(--muted);
-    white-space: nowrap;
-  }
-
-  /* MORE BUTTON */
-  .more-btn {
-    display: flex; align-items: center; gap: 0.5rem;
-    margin: 1.5rem auto 0;
-    padding: 0.65rem 1.5rem;
-    border: 1px solid var(--blue); border-radius: 2px;
-    background: transparent; color: var(--blue);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.875rem; font-weight: 500;
-    cursor: pointer; transition: all 0.2s;
-  }
-  .more-btn:hover { background: var(--blue); color: white; }
-  .more-row { display: none; }
-
-  /* EXPERIENCE */
-  .exp-item { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
-  .exp-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 0.4rem; }
-  .exp-title { font-size: 1.05rem; font-weight: 600; }
-  .exp-company { font-size: 0.9rem; color: var(--blue); font-weight: 500; margin-bottom: 0.75rem; }
-  .exp-date { font-size: 0.8rem; color: var(--muted); white-space: nowrap; font-style: italic; }
-  .exp-bullets { list-style: none; }
-  .exp-bullets li {
-    font-size: 0.9rem; color: #374151; line-height: 1.6;
-    padding: 0.25rem 0 0.25rem 1.2rem; position: relative;
-  }
-  .exp-bullets li::before {
-    content: '—'; position: absolute; left: 0;
-    color: var(--blue); font-weight: 600;
-  }
-  .exp-keyline {
-    font-size: 0.82rem; color: var(--muted);
-    font-style: italic; margin-top: 0.5rem;
-    padding-left: 1.2rem;
-  }
-
-  /* CREATIVE CARDS */
-  .creative-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 2rem;
-  }
-  .creative-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    padding: 1.5rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .creative-card:hover {
-    border-color: #B8821A;
-    box-shadow: 0 4px 16px rgba(184,130,26,0.1);
-  }
-  .card-type {
-    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em;
-    text-transform: uppercase; color: #B8821A;
-    margin-bottom: 0.5rem;
-  }
-  .card-title {
-    font-family: 'Lora', serif;
-    font-size: 1.05rem; font-weight: 600;
-    margin-bottom: 0.4rem; line-height: 1.35;
-  }
-  .card-sub {
-    font-size: 0.78rem; color: var(--muted);
-    margin-bottom: 0.75rem;
-  }
-  .card-desc {
-    font-size: 0.85rem; color: #4B5563; line-height: 1.6;
-  }
-
-  /* AWARDS */
-  .award-list { display: flex; flex-direction: column; gap: 1rem; }
-  .award-item {
-    display: flex; align-items: flex-start; gap: 1.25rem;
-    padding: 1rem 1.25rem;
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: 2px;
-  }
-  .award-year {
-    font-size: 0.78rem; font-weight: 600; color: var(--muted);
-    white-space: nowrap; min-width: 40px; padding-top: 0.15rem;
-  }
-  .award-body { flex: 1; }
-  .award-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
-  .award-meta { font-size: 0.82rem; color: var(--muted); font-style: italic; }
-
-  /* CERTS */
-  .cert-row {
-    display: flex; flex-wrap: wrap; gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-  .cert-tag {
-    padding: 0.4rem 0.85rem;
-    border: 1px solid var(--blue);
-    border-radius: 2px;
-    font-size: 0.82rem; color: var(--blue);
-    background: rgba(27,108,168,0.06);
-  }
-
-  /* CONTACT */
-  .contact-section {
-    background: var(--navy); color: var(--white);
-    padding: 5rem 2rem;
-    text-align: center;
-  }
-  .contact-section h2 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 2rem; font-weight: 300;
-    color: var(--white); margin-bottom: 0.5rem;
-  }
-  .contact-sub {
-    font-family: 'Lora', serif; font-style: italic;
-    color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;
-  }
-  .contact-links {
-    display: flex; flex-wrap: wrap; gap: 1rem;
-    justify-content: center;
-  }
-  .contact-link {
-    padding: 0.65rem 1.5rem;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 2px;
-    color: rgba(255,255,255,0.8); text-decoration: none;
-    font-size: 0.875rem;
-    transition: all 0.2s;
-  }
-  .contact-link:hover { background: rgba(255,255,255,0.1); border-color: white; color: white; }
-  .contact-link.primary { background: var(--blue); border-color: var(--blue); color: white; }
-  .contact-link.primary:hover { background: #1557A0; }
-
-  /* LANG TOGGLE */
-  .lang-toggle {
-    display: flex; gap: 0.5rem; align-items: center;
-  }
-  .lang-btn {
-    padding: 0.2rem 0.6rem;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 2px; background: transparent;
-    color: rgba(255,255,255,0.6); font-size: 0.75rem;
-    cursor: pointer; transition: all 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .lang-btn.active { background: var(--white); color: var(--navy); border-color: var(--white); }
-
-  [data-zh] { display: none !important; }
-  .lang-zh [data-zh] { display: revert; }
-  .lang-zh [data-en] { display: none !important; }
-  [data-zh] { display: none !important; }
-
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    .nav-links { gap: 1rem; }
-    .hero-stats { gap: 1.5rem; }
-    .exp-header { flex-direction: column; }
-    .proj-table { font-size: 0.82rem; }
-    .proj-table th, .proj-table td { padding: 0.6rem 0.5rem; }
-  }
+footer { text-align: center; padding: 2rem; font-size: 12px; color: var(--soft); border-top: 1px solid var(--rule); }
 </style>
 </head>
-<body>
+<body class="lang-en">
 
-<!-- NAV -->
 <nav>
-  <span class="nav-name">Rob Chen 陳正立</span>
+  <div class="nav-name">Rob Chen <span>陳正立</span></div>
   <ul class="nav-links">
-    <li><a href="#projects" class="pm">PM Work</a></li>
-    <li><a href="#creative" class="creative">Creative</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#translation" data-en>Translation</a><a href="#translation" data-zh>翻譯作品</a></li>
+    <li><a href="#publication" data-en>Publication</a><a href="#publication" data-zh>出版</a></li>
+    <li><a href="#awards" data-en>Awards</a><a href="#awards" data-zh>獲獎</a></li>
+    <li><a href="#marketing" data-en>Marketing</a><a href="#marketing" data-zh>行銷</a></li>
+    <li><a href="#contact" data-en>Contact</a><a href="#contact" data-zh>聯絡</a></li>
   </ul>
   <div class="lang-toggle">
     <button class="lang-btn active" onclick="setLang('en')">EN</button>
-    <button class="lang-btn" onclick="setLang('zh')">中</button>
+    <button class="lang-btn" onclick="setLang('zh')">中文</button>
   </div>
+  <a href="https://rob94321010-dotcom.github.io/robchen_portfolio_PMP/" target="_blank"
+     style="font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;background:#1d4ed8;color:white;text-decoration:none;white-space:nowrap;flex-shrink:0;">
+    📋 PM Portfolio
+  </a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <span class="hero-label">Portfolio</span>
-    <h1><span>Rob Chen</span></h1>
-    <div class="hero-zh">陳正立</div>
-    <div class="hero-divider"></div>
-    <p class="hero-desc" data-en>Aviation System Implementation PM · Bilingual Writer &amp; Translator · PMP® Certified</p>
-    <p class="hero-desc" data-en style="font-family: 'Lora', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.5); margin-top: -1rem;">The discipline of project management and the precision of literary writing are, to me, the same skill applied in different contexts.</p>
-    <p class="hero-desc" data-zh>航空系統導入專案管理師 · 雙語作家暨文案譯者 · PMP® 認證</p>
-    <p class="hero-desc" data-zh style="font-family: 'Lora', serif; font-style: italic; font-size: 1rem; color: rgba(255,255,255,0.5); margin-top: -1rem;">專案管理的嚴謹與文學寫作的精準，對我而言是同一種能力在不同情境下的展現。</p>
-
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num blue">8+</div>
-        <div class="hero-stat-label" data-en>Years PM Experience</div>
-        <div class="hero-stat-label" data-zh>年PM經驗</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num blue">102</div>
-        <div class="hero-stat-label" data-en>Months Project Delivery</div>
-        <div class="hero-stat-label" data-zh>個月專案交付</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num gold">940</div>
-        <div class="hero-stat-label">TOEIC</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num gold">13+</div>
-        <div class="hero-stat-label" data-en>Years Aviation</div>
-        <div class="hero-stat-label" data-zh>年航空實務</div>
-      </div>
-    </div>
-
-    <div class="hero-badges">
-      <span class="badge badge-blue">PMP® #4379030</span>
-      <span class="badge badge-blue">Jeppesen · CTi Pegasys</span>
-      <span class="badge badge-gold" data-en>Published Author</span>
-      <span class="badge badge-gold" data-zh>獲獎雙語作家</span>
-      <span class="badge badge-gold">M.A. GPA 4.0</span>
-      <span class="badge badge-neutral">SE · BE · AU · DK · TW</span>
-    </div>
+<div class="hero">
+  <div class="hero-name"><strong>Rob Chen</strong><span class="sub">陳正立</span></div>
+  <div class="hero-role" data-en>Bilingual Writer &amp; Content Translator · Literary Translator · Award-winning Author</div>
+  <div class="hero-role" data-zh>雙語作家暨文案譯者 · 文學譯者 · 獲獎詩人</div>
+  <div class="hero-desc" data-en>M.A. in Comparative Literature · TOEIC 940 · PMP® Certified<br>Over a decade of professional bilingual writing across technical documentation, literary translation, and brand copy — in English and Traditional Chinese.</div>
+  <div class="hero-desc" data-zh>東吳大學英美文學研究所碩士 · 精通英語（TOEIC 940）· PMP®認證<br>二十年以上中英雙語專業寫作經驗，涵蓋技術文件、文學翻譯與品牌文案。</div>
+  <div class="hero-tags">
+    <span class="hero-tag" data-en>EN ⇄ ZH Translation</span><span class="hero-tag" data-zh>中英翻譯</span>
+    <span class="hero-tag" data-en>Technical Writing</span><span class="hero-tag" data-zh>技術文件</span>
+    <span class="hero-tag" data-en>Brand Copywriting</span><span class="hero-tag" data-zh>品牌文案</span>
+    <span class="hero-tag" data-en>Literary Translation</span><span class="hero-tag" data-zh>文學翻譯</span>
+    <span class="hero-tag" data-en>Indigenous Culture</span><span class="hero-tag" data-zh>原住民文化</span>
   </div>
-</section>
+</div>
 
-<!-- PM PROJECTS -->
-<section class="section" id="projects">
-  <div class="section-inner">
-    <div class="section-label blue" data-en>Project Management</div>
-    <div class="section-label blue" data-zh>專案管理</div>
-    <h2 data-en>Selected Project Portfolio</h2>
-    <h2 data-zh>精選專案組合</h2>
+<div class="container">
 
-    <table class="proj-table" data-en>
-      <thead>
-        <tr>
-          <th>Project</th><th>Role</th><th>Duration</th><th>Key Result</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>CTi Pegasys CMS — Greenfield Launch</td><td class="mono">Project Manager (5+)</td><td class="mono">22 mo.</td><td class="result">On-time go-live from zero; full SOP library delivered</td></tr>
-        <tr><td>Jeppesen CMS Implementation</td><td class="mono">Core Team Member (10)</td><td class="mono">18 mo.</td><td class="result">Zero critical defects at UAT; written recommendations from Boeing Global Services Senior Manager and Jeppesen specialist</td></tr>
-        <tr><td>Braathens Regional Airlines Data Analytics</td><td class="mono">Scheduling Analyst & Optimizer (3)</td><td class="mono">12 mo.</td><td class="result">Optimized crew scheduling; reduced operational costs</td></tr>
-        <tr><td>Brussels Airlines Training Replanning</td><td class="mono">Project Manager (3)</td><td class="mono">7 mo.</td><td class="result">100% regulatory compliance; full documentation delivered</td></tr>
-        <tr><td>Jettime Crew Planning Project</td><td class="mono">Project Manager (3)</td><td class="mono">4 mo.</td><td class="result">Full Winter 2023/24 crew pairing & rostering on time</td></tr>
-        <tr class="more-row"><td>Project Rubik (Virgin Australia)</td><td class="mono">Project Manager (2)</td><td class="mono">6 mo.</td><td class="result">Comparative data baseline: VA native system vs Jeppesen CMS</td></tr>
-        <tr class="more-row"><td>IQSMS Safety Management System</td><td class="mono">Core Team Member (3)</td><td class="mono">13 mo.</td><td class="result">Passed acceptance; STARLUX Airlines SMS certified</td></tr>
-        <tr class="more-row"><td>Jetstar Crew Preference System Evaluation</td><td class="mono">Tech Evaluator (4)</td><td class="mono">3 mo.</td><td class="result">Strategic assessment for global crew scheduling optimization</td></tr>
-        <tr class="more-row"><td>VeeOne Cross-Cultural Communication Strategy</td><td class="mono">Project Manager (3)</td><td class="mono">8 mo.</td><td class="result">Cultural framework delivered to HR for implementation</td></tr>
-        <tr class="more-row"><td>VeeOne Hibermate Internal Communication</td><td class="mono">Project Manager (2)</td><td class="mono">3 mo.</td><td class="result">High-trust cross-cultural communication channel established</td></tr>
-        <tr class="more-row"><td>VeeOne Teams Channel Restructure</td><td class="mono">Project Manager (2)</td><td class="mono">3 mo.</td><td class="result">Significantly reduced organizational information gaps</td></tr>
-        <tr class="more-row"><td>NAER SurveyCake System Implementation</td><td class="mono">Project Manager (2)</td><td class="mono">3 mo.</td><td class="result">System implemented & handed over; user onboarding completed</td></tr>
-      </tbody>
-    </table>
+  <div class="section" id="translation">
+    <div class="section-header">
+      <span class="section-title" data-en>Translation &amp; Content Projects</span>
+      <span class="section-title" data-zh>翻譯與文案撰寫</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="card-grid">
 
-    <table class="proj-table" data-zh>
-      <thead>
-        <tr>
-          <th>專案名稱</th><th>角色</th><th>期程</th><th>核心成果</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>CTi Pegasys 系統導入（Greenfield）</td><td class="mono">專案經理（5人以上）</td><td class="mono">22 個月</td><td class="result">如期上線；完整 SOP 文件庫建立完成</td></tr>
-        <tr><td>Jeppesen CMS 系統導入</td><td class="mono">核心成員（10人）</td><td class="mono">18 個月</td><td class="result">UAT 零重大缺陷；獲 Boeing Global Services 資深經理及 Jeppesen 專家雙重推薦</td></tr>
-        <tr><td>Braathens Regional Airlines 數據分析</td><td class="mono">排班分析師暨優化師（3人）</td><td class="mono">12 個月</td><td class="result">優化機組員排班，降低 BRA 營運成本</td></tr>
-        <tr><td>Brussels Airlines 訓練航班重新規劃</td><td class="mono">專案經理（3人）</td><td class="mono">7 個月</td><td class="result">100% 法規合規；完整任務流程文件交付</td></tr>
-        <tr><td>Jettime 組員排班規劃專案</td><td class="mono">專案經理（3人）</td><td class="mono">4 個月</td><td class="result">Winter 2023/24 完整配對排班如期交付</td></tr>
-        <tr class="more-row"><td>Project Rubik（Virgin Australia）</td><td class="mono">專案經理（2人）</td><td class="mono">6 個月</td><td class="result">建立 VA 系統與 Jeppesen CMS 的 Pairing 優化數據比較基礎</td></tr>
-        <tr class="more-row"><td>IQSMS 安全管理系統</td><td class="mono">核心成員（3人）</td><td class="mono">13 個月</td><td class="result">通過系統驗收；星宇航空 SMS 認證取得</td></tr>
-        <tr class="more-row"><td>Jetstar 組員偏好系統評估</td><td class="mono">技術評估員（4人）</td><td class="mono">3 個月</td><td class="result">策略性建議交付；支援全球機組排班系統優化決策</td></tr>
-        <tr class="more-row"><td>VeeOne 跨文化溝通策略研究</td><td class="mono">專案經理（3人）</td><td class="mono">8 個月</td><td class="result">完成文化差異研究報告與溝通框架，交付 HR 執行</td></tr>
-        <tr class="more-row"><td>VeeOne Hibermate 內部溝通專案</td><td class="mono">專案經理（2人）</td><td class="mono">3 個月</td><td class="result">建立高信任度跨文化溝通管道</td></tr>
-        <tr class="more-row"><td>VeeOne Teams 知識庫重構</td><td class="mono">專案經理（2人）</td><td class="mono">3 個月</td><td class="result">大幅減少組織資訊落差</td></tr>
-        <tr class="more-row"><td>國家教育研究院 SurveyCake 系統導入</td><td class="mono">專案經理（2人）</td><td class="mono">3 個月</td><td class="result">系統完成導入與移交；完成使用者教育訓練</td></tr>
-      </tbody>
-    </table>
-
-    <button class="more-btn" onclick="toggleMore()" id="more-btn">
-      <span id="more-icon">▼</span>
-      <span id="more-text-en" data-en>+ 7 More Projects</span>
-      <span id="more-text-zh" data-zh>+ 7 個更多專案</span>
-    </button>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CREATIVE WORK -->
-<section class="section section-alt" id="creative">
-  <div class="section-inner">
-    <div class="section-label gold" data-en>Creative Work</div>
-    <div class="section-label gold" data-zh>創意作品</div>
-    <h2 data-en>Translation, Copywriting & Content</h2>
-    <h2 data-zh>翻譯、文案與內容創作</h2>
-
-    <div class="creative-grid">
-
-      <div class="creative-card">
-        <div class="card-type" data-en>Music Translation</div>
-        <div class="card-type" data-zh>音樂翻譯</div>
-        <div class="card-title">〈有人在夜裡跳舞〉</div>
-        <div class="card-sub">WUTU 烏兔樂團 · 2022</div>
-        <div class="card-desc" data-en>ZH→EN lyrics translation for official animated MV. Credited as official translator in YouTube production credits.</div>
-        <div class="card-desc" data-zh>烏兔樂團官方 MV 歌詞中譯英，YouTube 製作名單正式署名。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>Watch on YouTube →</a>
-          <a href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>在 YouTube 觀看 →</a>
+      <div class="card">
+        <div class="card-band band-teal"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Lyrics Translation · Band Profile</div>
+          <div class="card-type" data-zh>歌詞翻譯 · 樂團文案</div>
+          <div class="card-title">〈有人在夜裡跳舞〉<br><em style="font-size:13px;font-weight:400">Someone is Dancing at Night</em></div>
+          <div class="card-sub">WUTU Band 烏兔樂團 · 2021–2022</div>
+          <div class="card-desc" data-en>Translated the Chinese lyrics of 〈有人在夜裡跳舞〉into English for this alternative rock band's official animated MV — credited as official translator in the YouTube production credits (<em>Translation | Rob Chen</em>). Also authored the English band biography and MV description, published on StreetVoiceWriting.</div>
+          <div class="card-desc" data-zh>將烏兔樂團〈有人在夜裡跳舞〉中文歌詞英譯，由樂團主唱譜曲吟唱。另撰寫英文樂團介紹及MV說明文字，發布於 StreetVoice。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>ZH → EN</span><span class="tag tag-teal" data-zh>中譯英</span>
+            <span class="tag tag-grey" data-en>Music</span><span class="tag tag-grey" data-zh>音樂</span>
+            <span class="tag tag-grey" data-en>Official Credit</span><span class="tag tag-grey" data-zh>官方署名</span>
+          </div>
+          <a class="card-link" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <span data-en>Watch Official MV</span><span data-zh>觀看官方 MV</span>
+          </a>
         </div>
       </div>
 
-      <div class="creative-card">
-        <div class="card-type" data-en>Album Translation</div>
-        <div class="card-type" data-zh>專輯翻譯</div>
-        <div class="card-title"><em>Women's Island</em>《女人島》</div>
-        <div class="card-sub">阿洛·卡力亭·巴奇辣 Ado Kaliting Pacidal · 2021</div>
-        <div class="card-desc" data-en>Full ZH→EN album translation: 7 song lyrics, album concept essay, and 3 international Austronesian musician bios (Malaysia, New Zealand, Indonesia).</div>
-        <div class="card-desc" data-zh>7首歌詞、專輯概念文案及3位國際南島音樂人簡介（馬來西亞、紐西蘭、印尼）完整中譯英。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://www.youtube.com/watch?v=3L7h05_Nmqk" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>Watch on YouTube →</a>
-          <a href="https://www.youtube.com/watch?v=3L7h05_Nmqk" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>在 YouTube 觀看 →</a>
+      <div class="card">
+        <div class="card-band band-rose"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Full Album Translation</div>
+          <div class="card-type" data-zh>整張專輯翻譯</div>
+          <div class="card-title">《女人島》<br><em style="font-size:13px;font-weight:400">Women's Island</em></div>
+          <div class="card-sub">阿洛·卡力亭·巴奇辣 Ado Kaliting Pacidal · 2021</div>
+          <div class="card-desc" data-en>Full ZH→EN translation for indigenous Taiwanese artist Ado Kaliting Pacidal's album <em>Women's Island</em>: 7 song lyrics, album concept essay, and 3 international Austronesian musician bios (Malaysia, New Zealand, Indonesia). Content spans Pangcah indigenous culture, Austronesian identity, cross-island feminism, and environmental advocacy.</div>
+          <div class="card-desc" data-zh>負責原住民音樂人阿洛·卡力亭·巴奇辣《女人島》中歌詞的中文英譯：包括7首歌詞、專輯概念文案，以及3位國際南島音樂人簡介（馬來西亞、紐西蘭、印尼）。內容涵蓋巴賽族原住民文化、南島語族認同、跨島嶼女性主義與生態議題。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>ZH → EN</span><span class="tag tag-teal" data-zh>中譯英</span>
+            <span class="tag tag-grey" data-en>Indigenous</span><span class="tag tag-grey" data-zh>原住民文化</span>
+            <span class="tag tag-grey" data-en>Full Album</span><span class="tag tag-grey" data-zh>整張專輯</span>
+          </div>
         </div>
       </div>
 
-      <div class="creative-card">
-        <div class="card-type" data-en>Institutional Copywriting</div>
-        <div class="card-type" data-zh>機構文案</div>
-        <div class="card-title">Sky Lantern Teacup &amp; Indigo Dyed Coaster</div>
-        <div class="card-sub">國家教育研究院 NAER · 2020</div>
-        <div class="card-desc" data-en>Bilingual EN/ZH institutional gift copy for two cultural heritage products.</div>
-        <div class="card-desc" data-zh>天燈茶杯與藍染杯墊雙語文化禮品文案撰寫。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://rob94321010-dotcom.github.io/robchen-works/NAER_Bilingual_Copywriting_Portfolio.pdf" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>View PDF →</a>
-          <a href="https://rob94321010-dotcom.github.io/robchen-works/NAER_Bilingual_Copywriting_Portfolio.pdf" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>查看 PDF →</a>
+      <div class="card">
+        <div class="card-band band-slate"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Bilingual Gift Copywriting</div>
+          <div class="card-type" data-zh>雙語禮品文案</div>
+          <div class="card-title" data-en>Sky Lantern Teacup &amp; Indigo Dyed Coaster</div>
+          <div class="card-title" data-zh>天燈杯 &amp; 藍染杯墊</div>
+          <div class="card-sub" data-en>National Academy for Educational Research (NAER) · Sep 2020</div>
+          <div class="card-sub" data-zh>國家教育研究院 · 2020年9月</div>
+          <div class="card-desc" data-en>Authored bilingual (EN/ZH) gift copy for two institutional gifts commissioned by NAER. Wove the cultural heritage of Pingxi sky lanterns and Sanxia indigo dyeing traditions into brand narratives aligned with NAER's educational philosophy.</div>
+          <div class="card-desc" data-zh>受國家教育研究院委託，撰寫天燈杯及藍染杯墊兩件禮品的中英雙語文案，將平溪天燈與三峽藍染的在地歷史工藝，融入國教院教育理念，俾使禮品兼具文化深度與品牌識別度。</div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>EN + ZH</span><span class="tag tag-teal" data-zh>中文＋英文</span>
+            <span class="tag tag-grey" data-en>Brand Copy</span><span class="tag tag-grey" data-zh>品牌文案</span>
+            <span class="tag tag-grey" data-en>Government</span><span class="tag tag-grey" data-zh>政府機關</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="card-link" href="NAER_SkyLanternTeacup.pdf" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-en>Sky Lantern Teacup</span><span data-zh>天燈杯文案</span>
+            </a>
+            <a class="card-link" href="NAER_IndigoDyedCoaster.pdf" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-en>Indigo Dyed Coaster</span><span data-zh>藍染杯墊文案</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div class="creative-card">
-        <div class="card-type" data-en>Literary Translation</div>
-        <div class="card-type" data-zh>文學翻譯</div>
-        <div class="card-title">Jean Cocteau — "J'ai Trop Aimé"</div>
-        <div class="card-sub"><em>Chien Kun Poetry Quarterly</em>《乾坤詩刊》Vol. 54 · 2010</div>
-        <div class="card-desc" data-en>FR→ZH &amp; EN trilingual literary translation published in literary journal.</div>
-        <div class="card-desc" data-zh>法文詩作同時譯為中文與英文，刊登於《乾坤詩刊》第54期。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://mypaper.pchome.com.tw/korn31910/post/1320590753" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>Read Online →</a>
-          <a href="https://mypaper.pchome.com.tw/korn31910/post/1320590753" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>線上閱讀 →</a>
-        </div>
-      </div>
-
-      <div class="creative-card">
-        <div class="card-type" data-en>Editorial Platform</div>
-        <div class="card-type" data-zh>創作平台</div>
-        <div class="card-title">羅拔的老窩 Rob's Nest</div>
-        <div class="card-sub">Facebook · Est. 2019 · 1,382 followers</div>
-        <div class="card-desc" data-en>Content platform with regular columns: film criticism, music, literary reviews, parenting. Flagship column 《袋鼠羅爸育兒週記》 ran 90 consecutive weekly episodes (2020–2022); closing essay published in <em>Liberty Times</em>.</div>
-        <div class="card-desc" data-zh>設有電影評論、音樂賞析、文學分享等固定欄目。《袋鼠羅爸育兒週記》連載90週，後記刊登於《自由時報》。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://www.facebook.com/Mondayforever/" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>Visit Page →</a>
-          <a href="https://www.facebook.com/Mondayforever/" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>前往粉專 →</a>
-        </div>
-      </div>
-
-      <div class="creative-card">
-        <div class="card-type" data-en>Published Prose</div>
-        <div class="card-type" data-zh>媒體刊登</div>
-        <div class="card-title">Media Publications</div>
-        <div class="card-sub">2022–2026</div>
-        <div class="card-desc" data-en>5 essays in <em>United Daily News</em>《聯合報》(2022–2026) · 1 essay in <em>Liberty Times</em>《自由時報》(2022). Most recent: 〈扁掉的聖誕老人〉April 2026.</div>
-        <div class="card-desc" data-zh>《聯合報》刊登散文5篇（2022–2026）·《自由時報》1篇（2022）· 最新：〈扁掉的聖誕老人〉2026年4月。</div>
-        <div style="margin-top: 1rem;">
-          <a href="https://udn.com/news/story/7272/9400450" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-en>Read Latest Article →</a>
-          <a href="https://udn.com/news/story/7272/9400450" target="_blank" style="display:inline-block; padding: 0.4rem 1rem; border: 1px solid #B8821A; border-radius: 2px; color: #B8821A; font-size: 0.82rem; text-decoration: none;" onmouseover="this.style.background='#B8821A';this.style.color='white'" onmouseout="this.style.background='transparent';this.style.color='#B8821A'" data-zh>閱讀最新文章 →</a>
+      <div class="card">
+        <div class="card-band band-gold"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Original Poetry · Award</div>
+          <div class="card-type" data-zh>原創詩作 · 首獎</div>
+          <div class="card-title">〈一位父親納稅者的獨白〉<br><em style="font-size:13px;font-weight:400">The Monologue of a Taxpayer as a Father</em></div>
+          <div class="card-sub" data-en>National Taxation Bureau · 2022 · Grand Prize (金賞)</div>
+          <div class="card-sub" data-zh>財政部國稅局 · 2022年 · 首獎（金賞）</div>
+          <div class="card-desc" data-en>Written in response to the National Taxation Bureau's "Poet Write for You" bilingual poetry competition, this poem takes the perspective of a taxpaying father reflecting on his civic duties and his role as a parent. The work won the Grand Prize (金賞 / 1st Prize) — selected from open submissions nationwide. Both the Chinese and English versions were produced by the author, and the poem was subsequently produced as an official bilingual video by the organizer.</div>
+          <div class="card-desc" data-zh>受財政部國稅局「文青稅客，為你寫詩」雙語詩徵文活動之邀而作，以一位父親納稅者的視角，寫下對納稅義務與親職身份的內心獨白。本作品獲選首獎（金賞），並由主辦單位製作為官方雙語影片。中英文版本均由作者本人撰寫。</div>
+          <div class="card-tags">
+            <span class="tag tag-gold" data-en>Grand Prize</span><span class="tag tag-gold" data-zh>首獎 金賞</span>
+            <span class="tag tag-grey" data-en>Bilingual</span><span class="tag tag-grey" data-zh>雙語</span>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:0.5rem;">
+            <a class="card-link" href="https://www.youtube.com/watch?v=nUPJ1DMVzBw" target="_blank">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span data-en>Watch (ZH)</span><span data-zh>觀看中文版</span>
+            </a>
+            <a class="card-link" href="https://www.youtube.com/watch?v=ii7dUbmr3DM" target="_blank">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              <span data-en>Watch (EN)</span><span data-zh>觀看英文版</span>
+            </a>
+          </div>
         </div>
       </div>
 
     </div>
   </div>
-</section>
 
-<div class="section-divider"></div>
-
-<!-- EXPERIENCE -->
-<section class="section" id="experience">
-  <div class="section-inner">
-    <div class="section-label blue" data-en>Experience</div>
-    <div class="section-label blue" data-zh>工作經歷</div>
-    <h2 data-en>Professional Experience</h2>
-    <h2 data-zh>專業經歷</h2>
-
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-title" data-en>Planning Specialist & Consultant</div>
-          <div class="exp-title" data-zh>企劃顧問</div>
-          <div class="exp-company">VeeOne · Sweden (Remote)</div>
-        </div>
-        <div class="exp-date">Apr 2022 – Present</div>
-      </div>
-      <ul class="exp-bullets">
-        <li data-en>Sole bilingual PM for B2B consulting engagements across Sweden, Belgium, Australia, and Denmark</li>
-        <li data-zh>擔任唯一雙語 PM，服務瑞典、比利時、澳洲及丹麥等地的航空客戶</li>
-        <li data-en>Produced English SOPs, training materials, analytical reports and client-facing presentations</li>
-        <li data-zh>以英文產出系統操作說明、SOP、訓練教材及技術分析報告</li>
-        <li data-en>Coordinated cross-cultural remote team across 4+ time zones</li>
-        <li data-zh>協調跨越4個以上時區的跨國遠距團隊</li>
-      </ul>
-      <div class="exp-keyline" data-en>Key clients: Braathens Regional Airlines (SE) · Brussels Airlines (BE) · Virgin Australia (AU) · Jettime (DK) · Jetstar (AU)</div>
-      <div class="exp-keyline" data-zh>主要客戶：Braathens Regional Airlines（瑞典）· Brussels Airlines（比利時）· Virgin Australia（澳洲）· Jettime（丹麥）· Jetstar（澳洲）</div>
+  <div class="section" id="marketing">
+    <div class="section-header">
+      <span class="section-title" data-en>Creative Management &amp; Marketing</span>
+      <span class="section-title" data-zh>創意經營與行銷</span>
+      <div class="section-rule"></div>
     </div>
 
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-title" data-en>Manager / Senior Staff</div>
-          <div class="exp-title" data-zh>課長 / 資深專員</div>
-          <div class="exp-company">STARLUX Airlines 星宇航空 · Taiwan</div>
-        </div>
-        <div class="exp-date">Apr 2018 – Apr 2020</div>
-      </div>
-      <ul class="exp-bullets">
-        <li data-en>Founding member of the Pilot Scheduling Section — de facto department lead reporting directly to VP</li>
-        <li data-zh>航員調派課開航元老，直屬副總管轄</li>
-        <li data-en>PM for 22-month Greenfield CTi Pegasys CMS implementation</li>
-        <li data-zh>主導22個月 CTi Pegasys CMS Greenfield 系統導入</li>
-        <li data-en>Authored bilingual Scheduling Guidelines manual and SOP suite; certified internal lecturer</li>
-        <li data-zh>編撰雙語排班準則手冊及SOP文件；取得企業內部講師認證</li>
-      </ul>
-    </div>
+    <div class="card-grid">
 
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-title" data-en>Administrative Assistant</div>
-          <div class="exp-title" data-zh>行政助理</div>
-          <div class="exp-company">National Academy for Educational Research 國家教育研究院 · Taiwan</div>
+      <div class="card">
+        <div class="card-band band-teal"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Content Platform · Social Media Management</div>
+          <div class="card-type" data-zh>內容平台 · 社群媒體經營</div>
+          <div class="card-title" data-en>Rob's Nest<br><em style="font-size:13px;font-weight:400">羅拔的老窩</em></div>
+          <div class="card-title" data-zh>羅拔的老窩<br><em style="font-size:13px;font-weight:400">Rob's Nest</em></div>
+          <div class="card-sub" data-en>Facebook Content Platform · Est. March 2019 · 1,382 Followers</div>
+          <div class="card-sub" data-zh>Facebook 創作平台 · 2019年3月創立 · 1,382 位追蹤者</div>
+          <div class="card-desc" data-en>
+            An independently managed bilingual content platform featuring regular editorial columns: film criticism (老羅看電影), music appreciation (老羅的音樂盒), literary reviews (讀書趣), poetry sharing (詩作分享), parenting life (育兒趣), and personal essays. Flagship column: 袋鼠羅爸育兒週記 (Daddy Roo's Parenting Weekly) — 90 consecutive weekly episodes (2020–2022), 628 days of uninterrupted content production; the closing essay was published in <em>Liberty Times</em>《自由時報》. Demonstrates sustained content planning, editorial scheduling, PR-style storytelling, and audience engagement over 6+ years — capabilities directly aligned with marketing and editorial planning roles.
+          </div>
+          <div class="card-desc" data-zh>
+            獨立經營的個人雙語創作平台，設有「老羅看電影」、「老羅的音樂盒」、「讀書趣」、「詩作分享」、「育兒趣」、「生活隨筆」等固定欄目，持續產出具深度的原創內容。其中《袋鼠羅爸育兒週記》連載長達90週（2020–2022），每週定期產出，累積628天不間斷，後記〈我是奶爸，我驕傲〉更刊登於《自由時報》。六年以上的內容策畫、編輯排程、品牌敘事與受眾經營實務，與行銷編譯企劃所需能力高度吻合。
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-teal" data-en>Content Planning</span><span class="tag tag-teal" data-zh>內容策畫</span>
+            <span class="tag tag-grey" data-en>Editorial Scheduling</span><span class="tag tag-grey" data-zh>編輯排程</span>
+            <span class="tag tag-grey" data-en>Audience Engagement</span><span class="tag tag-grey" data-zh>受眾經營</span>
+            <span class="tag tag-grey" data-en>Brand Storytelling</span><span class="tag tag-grey" data-zh>品牌敘事</span>
+            <span class="tag tag-grey">6+ <span data-en>Years</span><span data-zh>年</span></span>
+          </div>
+          <a class="card-link" href="https://www.facebook.com/Mondayforever/" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-en>Visit Rob's Nest</span><span data-zh>前往羅拔的老窩</span>
+          </a>
         </div>
-        <div class="exp-date">May 2020 – Nov 2020</div>
       </div>
-      <ul class="exp-bullets">
-        <li data-en>PM for SurveyCake survey system implementation</li>
-        <li data-zh>主導 SurveyCake 問卷系統導入專案（PM）</li>
-        <li data-en>Bilingual EN/ZH institutional copywriting and translation</li>
-        <li data-zh>協助綜規室中英文文案撰寫與編譯</li>
-      </ul>
-    </div>
 
-    <div class="exp-item">
-      <div class="exp-header">
-        <div>
-          <div class="exp-title" data-en>Asst. Dep. Section Manager · Crew Schedule Planner</div>
-          <div class="exp-title" data-zh>助理副課長 · 組員排班規劃師</div>
-          <div class="exp-company">EVA Air 長榮航空 · Taiwan</div>
+      <div class="card">
+        <div class="card-band band-gold"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>PR · Media Relations</div>
+          <div class="card-type" data-zh>公關 · 媒體關係</div>
+          <div class="card-title" data-en>Media Features &amp; Interviews</div>
+          <div class="card-title" data-zh>媒體報導與專訪</div>
+          <div class="card-sub" data-en>2019 · Taiwan &amp; Hong Kong</div>
+          <div class="card-sub" data-zh>2019年 · 台灣及香港</div>
+          <div class="card-desc" data-en>
+            Following the publication of bilingual poetry collection <em>In Some Nights, Poetry</em>, received media coverage across multiple platforms: featured interview in Hong Kong's <em>The Roundtable: A Journal of Poetry</em> (vol.66, Jan 2019); invited guest on Hansheng Radio's "Learning is Now" programme (Oct 2019, Taiwan). Demonstrated ability to represent personal and institutional brand through media channels.
+          </div>
+          <div class="card-desc" data-zh>
+            詩集《詩眠集》出版後，獲多平台媒體報導：接受香港《圓桌詩刊》第六十六期文學專訪（2019年1月）；受邀至漢聲廣播電台「學習就是現在」節目分享創作（2019年10月，台灣）。展現透過媒體管道呈現個人品牌與專業形象的能力。
+          </div>
+          <div class="card-tags">
+            <span class="tag tag-gold" data-en>Media Interview</span><span class="tag tag-gold" data-zh>媒體專訪</span>
+            <span class="tag tag-grey" data-en>Radio</span><span class="tag tag-grey" data-zh>廣播</span>
+            <span class="tag tag-grey" data-en>Literary Journal</span><span class="tag tag-grey" data-zh>文學期刊</span>
+            <span class="tag tag-grey" data-en>Hong Kong</span><span class="tag tag-grey" data-zh>香港</span>
+          </div>
         </div>
-        <div class="exp-date">Jul 2011 – Mar 2018</div>
       </div>
-      <ul class="exp-bullets">
-        <li data-en>Core team member in 18-month Jeppesen CMS implementation (10-person cross-functional team)</li>
-        <li data-zh>參與18個月 Jeppesen CMS 系統導入（10人跨部門團隊）核心成員</li>
-        <li data-en>As a junior team member, received written recommendation from Boeing Global Services Senior Manager citing 'good potential of leadership attributes'</li>
-        <li data-zh>以新進成員身份獲 Boeing Global Services 資深經理於推薦信中評為具備『領導潛質』</li>
-      </ul>
+
     </div>
   </div>
-</section>
 
-<div class="section-divider"></div>
-
-<!-- AWARDS & CREDENTIALS -->
-<section class="section section-alt" id="awards">
-  <div class="section-inner">
-    <div class="section-label gold" data-en>Recognition & Credentials</div>
-    <div class="section-label gold" data-zh>獎項與資歷</div>
-    <h2 data-en>Awards, Publications & Certifications</h2>
-    <h2 data-zh>獎項、出版與證照</h2>
-
-    <div class="cert-row">
-      <span class="cert-tag">PMP® #4379030 (PMI, 2026)</span>
-      <span class="cert-tag">Jeppesen Rostering (Boeing, 2022)</span>
-      <span class="cert-tag">Hands-On Rave (VeeOne, 2025–26)</span>
-      <span class="cert-tag">TOEIC 940</span>
-      <span class="cert-tag">DELF B1 (French)</span>
-      <span class="cert-tag">German — Conversational</span>
-      <span class="cert-tag" data-en>M.A. Comparative Literature · GPA 4.0</span><span class="cert-tag" data-zh>比較文學碩士 · GPA 4.0</span>
+  <div class="section" id="publication">
+    <div class="section-header">
+      <span class="section-title" data-en>Publication</span>
+      <span class="section-title" data-zh>出版</span>
+      <div class="section-rule"></div>
     </div>
+    <div class="card-grid">
 
+      <div class="card">
+        <div class="card-band band-gold"></div>
+        <div class="card-body">
+          <div class="card-type" data-en>Bilingual Poetry Collection</div>
+          <div class="card-type" data-zh>中英雙語詩集</div>
+          <div class="card-title">詩眠集<br><em style="font-size:13px;font-weight:400">In Some Nights, Poetry</em></div>
+          <div class="card-sub" data-en>Showwe Information 秀威資訊 · 2019</div>
+          <div class="card-sub" data-zh>秀威資訊 · 2019年4月</div>
+          <div class="card-desc" data-en>A bilingual poetry collection published by Showwe Information. Upon publication, the author was interviewed by <em>The Roundtable: A Journal of Poetry</em> (Hong Kong, vol.66) and invited to share work on Hansheng Radio's "Learning is Now" programme. Since publication, the author's prose and poetry have been regularly featured in major Taiwan media including <em>United Daily News</em> (聯合報) and <em>The Liberty Times</em> (自由時報), as well as literary journals including <em>Chien Kun Poetry Quarterly</em>《乾坤詩刊》, Lotus Literature, and People Fish Magazine — with the most recent publication in April 2026.</div>
+          <div class="card-desc" data-zh>中英雙語詩集，由秀威資訊出版。出版後，作者接受香港《圓桌詩刊》第六十六期專訪，並受邀於漢聲廣播電台「學習就是現在」節目分享創作。此後持續於《聯合報》、《自由時報》等主流媒體及《乾坤詩刊》、《有荷文學雜誌》、《人間魚詩生活誌》等文學刊物發表詩作與散文，最近一篇散文〈扁掉的聖誕老人〉刊登於2026年4月《聯合報》。</div>
+          <div class="card-tags">
+            <span class="tag tag-gold" data-en>Published</span><span class="tag tag-gold" data-zh>已出版</span>
+            <span class="tag tag-grey" data-en>ZH + EN</span><span class="tag tag-grey" data-zh>中文＋英文</span>
+            <span class="tag tag-grey">2019</span>
+          </div>
+          <a class="card-link" href="https://www.books.com.tw/products/0010819596" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-en>View on Books.com.tw</span><span data-zh>博客來購買頁面</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="awards">
+    <div class="section-header">
+      <span class="section-title" data-en>Awards &amp; Recognition</span>
+      <span class="section-title" data-zh>獲獎紀錄</span>
+      <div class="section-rule"></div>
+    </div>
     <div class="award-list">
+
       <div class="award-item">
+        <div class="award-icon">🏆</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Outstanding Young Poet Award (2023)</div>
+          <div class="award-title" data-zh>2023年優秀青年詩人獎</div>
+          <div class="award-meta" data-en>Poetry Society of the Republic of China (中華民國新詩學會) · Awarded 2024</div>
+          <div class="award-meta" data-zh>中華民國新詩學會 · 2024年頒發</div>
+        </div>
         <div class="award-year">2024</div>
-        <div class="award-body">
-          <div class="award-title" data-en>Outstanding Young Poet Award (2023) — Poetry Society of the Republic of China 中華民國新詩學會</div>
-          <div class="award-title" data-zh>中華民國新詩學會 2023 年優秀青年詩人獎</div>
-        </div>
       </div>
+
       <div class="award-item">
+        <div class="award-icon">🥇</div>
+        <div class="award-body">
+          <div class="award-title" data-en>1st Prize — "Poet Write for You" Bilingual Poetry Competition</div>
+          <div class="award-title" data-zh>「文青稅客，為你寫詩」雙語詩徵文活動首獎</div>
+          <div class="award-meta" data-en>Poem: 〈一位父親納稅者的獨白〉"The Monologue of a Taxpayer as a Father"</div>
+          <div class="award-meta" data-zh>作品：〈一位父親納稅者的獨白〉</div>
+        </div>
         <div class="award-year">2022</div>
-        <div class="award-body">
-          <div class="award-title" data-en>1st Prize — "Poet Write for You" Bilingual Poetry Competition（文青稅客，為你寫詩）</div>
-          <div class="award-title" data-zh>「文青稅客，為你寫詩」雙語詩徵文首獎</div>
-        </div>
       </div>
+
       <div class="award-item">
+        <div class="award-icon">📖</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Published — In Some Nights, Poetry (Insomnia Poetry 詩眠集)</div>
+          <div class="award-title" data-zh>出版《詩眠集》Insomnia Poetry; In Some Nights, Poetry</div>
+          <div class="award-meta" data-en>Showwe Information · Interviewed by <em>The Roundtable: A Journal of Poetry</em> (Hong Kong, vol.66)</div>
+          <div class="award-meta" data-zh>秀威資訊 · 接受香港《圓桌詩刊》第六十六期專訪</div>
+        </div>
         <div class="award-year">2019</div>
-        <div class="award-body">
-          <div class="award-title" data-en>Published Author — 《詩眠集》<em>In Some Nights, Poetry</em></div>
-          <div class="award-title" data-zh>出版中英雙語詩集《詩眠集》· 秀威資訊</div>
-          <div class="award-meta" data-en>Interviewed by <em>The Roundtable: A Journal of Poetry</em> (Hong Kong, vol.66) · Hansheng Radio 漢聲廣播電台</div>
-          <div class="award-meta" data-zh>接受香港《圓桌詩刊》第六十六期專訪 · 漢聲廣播電台節目分享</div>
-        </div>
       </div>
+
       <div class="award-item">
-        <div class="award-year">2009</div>
+        <div class="award-icon">🎬</div>
         <div class="award-body">
-          <div class="award-title" data-en>1st Prize — 2nd Swordsoul Literary Competition 第二屆舞劍壇文學獎, New Poetry Category</div>
-          <div class="award-title" data-zh>第二屆舞劍壇文學獎新詩組首獎 · 〈麗姐〉</div>
+          <div class="award-title" data-en>Selected Work — 〈雙子〉(Twins)</div>
+          <div class="award-title" data-zh>〈雙子〉獲「電影截句」優選詩作</div>
+          <div class="award-meta" data-en>電影截句 (Short Poems About Film) Competition</div>
+          <div class="award-meta" data-zh>電影截句詩選競賽 · 優選入選</div>
         </div>
+        <div class="award-year">2018</div>
       </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥇</div>
+        <div class="award-body">
+          <div class="award-title" data-en>1st Prize — 2nd Swordsoul Literary Competition (第二屆舞劍壇文學獎)</div>
+          <div class="award-title" data-zh>第二屆舞劍壇文學獎新詩組首獎</div>
+          <div class="award-meta" data-en>New Poetry Category · Poem: 〈麗姐〉(Leda)</div>
+          <div class="award-meta" data-zh>新詩組 · 作品：〈麗姐〉</div>
+        </div>
+        <div class="award-year">2009</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-body">
+          <div class="award-title" data-en>3rd Place — Happy Poetry Nanometer Prose Poetry Competition</div>
+          <div class="award-title" data-zh>幸福詩歌奈米散文詩徵文第三名</div>
+          <div class="award-meta" data-en>Poem: 〈雙人舞〉(Dance for Two)</div>
+          <div class="award-meta" data-zh>作品：〈雙人舞〉</div>
+        </div>
+        <div class="award-year">2006</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🥉</div>
+        <div class="award-body">
+          <div class="award-title" data-en>3rd Place — 26th Shuanghsi Literary Competition (第二十六屆雙溪文學獎)</div>
+          <div class="award-title" data-zh>第二十六屆雙溪文學獎新詩組第三名</div>
+          <div class="award-meta" data-en>New Poetry Category · Poem: 〈妳把白天晝成了海洋〉(You Painted the Day as the Sea)</div>
+          <div class="award-meta" data-zh>新詩組 · 作品：〈妳把白天晝成了海洋〉</div>
+        </div>
+        <div class="award-year">2003</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">📰</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Published in Major Taiwan Media — Prose &amp; Poetry</div>
+          <div class="award-title" data-zh>主流媒體刊登——散文與詩作</div>
+          <div class="award-meta" data-en><em>United Daily News</em>《聯合報》· 5 essays (2022–2026) · <em>Liberty Times</em>《自由時報》· 1 essay (2022) · Most recent: 〈扁掉的聖誕老人〉April 2026</div>
+          <div class="award-meta" data-zh>《聯合報》5篇（2022–2026）·《自由時報》1篇（2022）· 最新：〈扁掉的聖誕老人〉2026年4月</div>
+        </div>
+        <div class="award-year">2022–2026</div>
+      </div>
+
+      <div class="award-item">
+        <div class="award-icon">🌐</div>
+        <div class="award-body">
+          <div class="award-title" data-en>Three-Language Translation — Jean Cocteau's "J'ai Trop Aimé"</div>
+          <div class="award-title" data-zh>尚考克多詩作「J'ai Trop Aimé」三語翻譯（法→中→英）</div>
+          <div class="award-meta" data-en>French → Chinese &amp; English translation · Published in <em>Chien Kun Poetry Quarterly</em>《乾坤詩刊》, Vol. 54 (2010) · Demonstrating trilingual (FR/ZH/EN) literary translation capability</div>
+          <div class="award-meta" data-zh>法文→中文＆英文翻譯 · 刊於《乾坤詩刊》54期（2010）· 展現法、中、英三語文學翻譯能力</div>
+        </div>
+        <div class="award-year">2010</div>
+      </div>
+
     </div>
   </div>
-</section>
 
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <h2 data-en>Get in Touch</h2>
-  <h2 data-zh>聯絡我</h2>
-  <p class="contact-sub" data-en>Open to PM, Bilingual MarComm, Technical Writing & Content roles</p>
-  <p class="contact-sub" data-zh>歡迎 PM、雙語行銷編譯、技術文件及內容相關職務洽詢</p>
-  <div class="contact-links">
-    <a href="mailto:rob94321010@gmail.com" class="contact-link primary">rob94321010@gmail.com</a>
-    <a href="https://linkedin.com/in/chengli-chen-177312a1" target="_blank" class="contact-link">LinkedIn</a>
-    <a href="https://www.facebook.com/Mondayforever/" target="_blank" class="contact-link">Rob's Nest 羅拔的老窩</a>
+  <div class="section" id="contact">
+    <div class="section-header">
+      <span class="section-title" data-en>Contact</span>
+      <span class="section-title" data-zh>聯絡方式</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-bar">
+      <a class="contact-item" href="mailto:rob94321010@gmail.com">
+        <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+        rob94321010@gmail.com
+      </a>
+      <a class="contact-item" href="https://linkedin.com/in/chengli-chen-177312a1" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="contact-item" href="https://www.youtube.com/watch?v=P_UWNysIKHg" target="_blank">
+        <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <span data-en>WUTU MV (Translation Credit)</span><span data-zh>WUTU MV（翻譯署名）</span>
+      </a>
+      <a class="contact-item" href="https://www.books.com.tw/products/0010819596" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <span data-en>Poetry Collection</span><span data-zh>詩集購買頁面</span>
+      </a>
+      <a class="contact-item" href="https://www.facebook.com/Mondayforever/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <span data-en>Rob's Nest (Content Platform, 1,382 followers)</span><span data-zh>羅拔的老窩（創作平台，1,382 追蹤者）</span>
+      </a>
+    </div>
   </div>
-</section>
+
+</div>
+
+<footer>
+  <span data-en>Rob Chen 陳正立 · Bilingual Content Specialist · rob94321010@gmail.com</span>
+  <span data-zh>陳正立 Rob Chen · 雙語內容專家 · rob94321010@gmail.com</span>
+</footer>
 
 <script>
-  function setLang(lang) {
-    if (lang === 'zh') {
-      document.body.classList.add('lang-zh');
-    } else {
-      document.body.classList.remove('lang-zh');
-    }
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.textContent.trim() === (lang === 'en' ? 'EN' : '中'));
-    });
-  }
-
-  function toggleMore() {
-    const rows = document.querySelectorAll('.more-row');
-    const btn = document.getElementById('more-btn');
-    const icon = document.getElementById('more-icon');
-    const textEn = document.getElementById('more-text-en');
-    const textZh = document.getElementById('more-text-zh');
-    const isHidden = rows[0].style.display === 'none' || rows[0].style.display === '';
-    rows.forEach(r => r.style.display = isHidden ? 'table-row' : 'none');
-    icon.textContent = isHidden ? '▲' : '▼';
-    textEn.textContent = isHidden ? 'Show Less' : '+ 7 More Projects';
-    textZh.textContent = isHidden ? '收起' : '+ 7 個更多專案';
-  }
-
-  // Init
-  setLang('en');
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.textContent === (lang === 'zh' ? '中文' : 'EN'));
+  });
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+}
 </script>
 </body>
 </html>
